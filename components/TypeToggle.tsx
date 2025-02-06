@@ -20,6 +20,7 @@ export const TypeToggle = () => {
 
   const getCount = async (newValue: RentType) => {
     const filters = getFilters({ rentType: newValue });
+
     const { count } = await getTenementCount(filters);
     setCount(count);
   };

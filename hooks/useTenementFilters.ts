@@ -46,7 +46,7 @@ export const useTenementFilters = () => {
       ...(override.withinId && { withinId: ensureArray(override.withinId) }),
       ...(override.type && { type: ensureArray(override.type) }),
       ...(override.rentType && {
-        rentType: [normalizeRentType(rentType)],
+        rentType: [normalizeRentType(override.rentType)],
       }),
       ...(override.rent && { rent: override.rent }),
     };
