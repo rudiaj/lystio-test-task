@@ -85,7 +85,7 @@ export const LocationSearch = ({
           onOpenAutoFocus={(e) => e.preventDefault()}
           alignOffset={0}
           sideOffset={32}
-          className="grid h-[618px] w-[calc(100vw-48px)] grid-cols-2 overflow-hidden rounded-xl bg-white py-8 shadow-popover md:w-max"
+          className="grid h-[618px] w-[calc(100vw-48px)] grid-cols-2 overflow-hidden rounded-xl bg-white py-8 shadow-popover data-[state=closed]:animate-[popup-content-hide_200ms] data-[state=open]:animate-[popup-content-show_200ms] md:w-max"
           align="center"
         >
           <div className="flex h-full flex-col gap-2 overflow-auto">

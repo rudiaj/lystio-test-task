@@ -53,7 +53,7 @@ export const CategorySelect = ({ onValueChange }: CategorySelectProps) => {
       </Select.Trigger>
       <Select.Portal>
         <Select.Content
-          className="w-max overflow-hidden rounded-xl bg-white py-8 shadow-popover"
+          className="w-max overflow-hidden rounded-xl bg-white py-8 shadow-popover data-[state=closed]:animate-[popup-content-hide_200ms] data-[state=open]:animate-[popup-content-show_200ms]"
           position="popper"
           sideOffset={32}
           align="center"

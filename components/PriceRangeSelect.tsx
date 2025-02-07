@@ -39,7 +39,7 @@ export const PriceRangeSelect = () => {
           }}
           alignOffset={0}
           sideOffset={32}
-          className="flex w-[calc(100vw-48px)] flex-col rounded-xl bg-white px-4 py-8 shadow-popover md:w-[619px]"
+          className="flex w-[calc(100vw-48px)] flex-col rounded-xl bg-white px-4 py-8 shadow-popover data-[state=closed]:animate-[popup-content-hide_200ms] data-[state=open]:animate-[popup-content-show_200ms] md:w-[619px]"
           align="center"
         >
           <span className="text-lg">Price Range</span>
