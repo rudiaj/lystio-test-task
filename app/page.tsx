@@ -19,7 +19,6 @@ export default async function Home({
       : [typeParam]
     : TYPES.map((category) => category.id.toString());
 
-  // Handle withinId parameter
   const withinIdParam = resolvedSearchParams.withinId;
   const selectedWithinId = withinIdParam
     ? Array.isArray(withinIdParam)
@@ -30,7 +29,6 @@ export default async function Home({
   const rentTypeParam = resolvedSearchParams.rentType;
   const selectedRentType = [normalizeRentType(rentTypeParam)];
 
-  // Handle rent range parameters
   const minRentParam = resolvedSearchParams.minRent;
   const maxRentParam = resolvedSearchParams.maxRent;
 

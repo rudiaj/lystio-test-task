@@ -140,7 +140,7 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
         </Slider.Root>
       </div>
 
-      <div className="flex justify-between text-sm">
+      <div className="md flex flex-col justify-between text-sm sm:flex-row">
         <div className="flex flex-col gap-2">
           <span className="text-base text-black/80">Min</span>
           <div className="relative">
@@ -148,7 +148,7 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
               type="number"
               value={range[0]}
               onChange={(e) => handleInputChange(0, e.target.value)}
-              className="w-[200px] rounded-md border border-[#E0DEF7] px-[10px] py-[13px] pr-8 text-base text-black"
+              className="w-full rounded-md border border-[#E0DEF7] px-[10px] py-[13px] pr-8 text-base text-black sm:w-[200px]"
               min={histogramData.range[0]}
               max={histogramData.range[1]}
             />
@@ -164,7 +164,7 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
               type="number"
               value={range[1]}
               onChange={(e) => handleInputChange(1, e.target.value)}
-              className="w-[200px] rounded-md border border-[#E0DEF7] px-[10px] py-[13px] pr-8 text-base text-black"
+              className="w-full rounded-md border border-[#E0DEF7] px-[10px] py-[13px] pr-8 text-base text-black sm:w-[200px]"
               min={histogramData.range[0]}
               max={histogramData.range[1]}
             />

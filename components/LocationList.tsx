@@ -10,12 +10,14 @@ type LocationListProps = {
   items: LocationItem[];
   title: string;
   emptyMessage?: string;
+  onSelect: (value: string) => void;
 };
 
 function LocationList({
   items,
   title,
   emptyMessage = "No items found",
+  onSelect,
 }: LocationListProps) {
   if (!items.length) {
     return (
@@ -26,13 +28,17 @@ function LocationList({
   }
 
   return (
-    <div className="">
+    <div>
       <h3 className="mb-2 px-4 py-1 text-sm text-[#0E0E0E] text-opacity-60">
         {title}
       </h3>
       <div className="space-y-2">
         {items.map((item) => (
-          <SearchItem key={item.id} item={item} onSelect={() => {}} />
+          <SearchItem
+            key={item.id}
+            item={item}
+            onSelect={() => onSelect(item.name)}
+          />
         ))}
       </div>
     </div>

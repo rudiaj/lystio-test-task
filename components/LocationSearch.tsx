@@ -8,6 +8,7 @@ import { useDebouncedCallback } from "use-debounce";
 import LocationList, { LocationItem } from "./LocationList";
 import PopularLocations from "./PopularLocations";
 import { Location, useActiveLocation } from "@/hooks/useActiveLocation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const sessionToken = uuidv4();
 
@@ -21,7 +22,11 @@ export const LocationSearch = ({
   popularLocations,
 }: LocationSearchProps) => {
   const { activeLocationIndex } = useActiveLocation(popularLocations);
-  const [searchValue, setSearchValue] = useState("");
+  const searchParams = useSearchParams();
+  const [searchValue, setSearchValue] = useState(
+    searchParams.get("search") || "",
+  );
+  const router = useRouter();
   const [activeIndex, setActiveIndex] = useState(activeLocationIndex);
 
   const debouncedFetch = useDebouncedCallback(async (value: string) => {
@@ -51,10 +56,11 @@ export const LocationSearch = ({
     }
   }, 300);
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
+  const handleInputChange = (value: string) => {
     setSearchValue(value);
-
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("search", value);
+    router.push(`?${params.toString()}`, { scroll: false });
     debouncedFetch(value);
   };
 
@@ -69,7 +75,7 @@ export const LocationSearch = ({
               className="w-full truncate text-base text-black outline-none"
               placeholder="Search address, neighbourhood, city, or ZIP code"
               value={searchValue}
-              onChange={handleInputChange}
+              onChange={(event) => handleInputChange(event.target.value)}
             />
           </div>
         </div>
@@ -89,12 +95,17 @@ export const LocationSearch = ({
               items={popularLocations}
               onChange={setActiveIndex}
             />
-            <LocationList title="Recent Searches" items={recentSearches} />
+            <LocationList
+              title="Recent Searches"
+              items={recentSearches}
+              onSelect={handleInputChange}
+            />
           </div>
           <div className="h-full overflow-auto">
             <LocationList
               title={`Districts in ${popularLocations[activeIndex].name}`}
               items={popularLocations[activeIndex].children || []}
+              onSelect={handleInputChange}
             />
           </div>
         </Popover.Content>
