@@ -66,7 +66,7 @@ export const LocationSearch = ({
   return (
     <Popover.Root>
       <Popover.Trigger className="relative md:pr-4 md:after:absolute md:after:right-0 md:after:top-1/2 md:after:h-[46px] md:after:w-[1px] md:after:-translate-y-1/2 md:after:bg-[#C6C6C6]">
-        <div className="flex items-center gap-[26px]">
+        <div className="flex items-center gap-[14px]">
           <Image width={22} height={22} alt="icon" src="/search.svg" />
           <div className="flex flex-1 flex-col items-start justify-center">
             <span className="text-lg">Location</span>

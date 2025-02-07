@@ -38,7 +38,7 @@ export const CategorySelect = ({ onValueChange }: CategorySelectProps) => {
     >
       <Select.Trigger
         className={clsx(
-          "relative flex gap-[14px] overflow-hidden whitespace-nowrap outline-transparent transition-colors duration-200 ease-out md:after:absolute md:after:right-0 md:after:top-1/2 md:after:h-[46px] md:after:w-[1px] md:after:-translate-y-1/2 md:after:bg-[#C6C6C6]",
+          "relative flex w-full min-w-0 gap-[14px] overflow-hidden whitespace-nowrap outline-transparent transition-colors duration-200 ease-out md:after:absolute md:after:right-0 md:after:top-1/2 md:after:h-[46px] md:after:w-[1px] md:after:-translate-y-1/2 md:after:bg-[#C6C6C6]",
           currentCategory ? "text-black" : "text-gray",
         )}
       >

@@ -19,7 +19,7 @@ export const PriceRangeSelect = () => {
 
   return (
     <Popover.Root>
-      <Popover.Trigger className="flex gap-[14px]">
+      <Popover.Trigger className="flex w-full min-w-0 gap-[14px]">
         <Image width={29} height={28} alt="icon" src="/price.svg" />
         <div className="flex flex-1 flex-col items-start justify-center truncate">
           <span className="text-lg">Price</span>
