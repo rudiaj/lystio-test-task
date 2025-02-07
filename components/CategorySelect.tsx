@@ -4,7 +4,7 @@ import { TYPES } from "@/constants/types";
 import clsx from "clsx";
 import Image from "next/image";
 import { Select } from "radix-ui";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { getTenementCount } from "@/helpers/getTenementCount";
 import { useCount } from "@/context/CountContext";
 import { useTenementFilters } from "@/hooks/useTenementFilters";
@@ -14,7 +14,6 @@ interface CategorySelectProps {
 }
 
 export const CategorySelect = ({ onValueChange }: CategorySelectProps) => {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const currentCategory = searchParams.get("type");
   const { setCount } = useCount();
@@ -23,7 +22,7 @@ export const CategorySelect = ({ onValueChange }: CategorySelectProps) => {
   const updateQueryParam = async (newValue: string) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set("type", newValue);
-    router.push(`?${params.toString()}`, { scroll: false });
+    window.history.replaceState(null, "", `?${params.toString()}`);
     onValueChange?.(newValue);
 
     const filters = getFilters({ type: newValue });

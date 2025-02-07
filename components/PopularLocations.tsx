@@ -3,7 +3,7 @@
 import clsx from "clsx";
 import Image from "next/image";
 import { Dispatch, SetStateAction } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 import { useCount } from "@/context/CountContext";
 import { getTenementCount } from "@/helpers/getTenementCount";
@@ -29,7 +29,6 @@ function PopularLocations({
   onChange,
   activeIndex,
 }: LocationListProps) {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const { setCount } = useCount();
 
@@ -47,7 +46,7 @@ function PopularLocations({
     const params = new URLSearchParams(searchParams.toString());
     params.set("withinId", id);
 
-    router.push(`?${params.toString()}`, { scroll: false });
+    window.history.replaceState(null, "", `?${params.toString()}`);
 
     const filters = getFilters({ withinId: id });
 

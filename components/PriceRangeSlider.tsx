@@ -3,7 +3,7 @@
 import { useCount } from "@/context/CountContext";
 import { getTenementCount } from "@/helpers/getTenementCount";
 import { useTenementFilters } from "@/hooks/useTenementFilters";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { Slider } from "radix-ui";
 import { useState, useEffect, useMemo } from "react";
 import { useDebouncedCallback } from "use-debounce";
@@ -24,7 +24,6 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
   setRange,
 }) => {
   const searchParams = useSearchParams();
-  const router = useRouter();
   const { setCount } = useCount();
   const { getFilters, filters } = useTenementFilters();
   const [histogramData, setHistogramData] = useState<HistogramResponse | null>(
@@ -115,7 +114,7 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
     }
 
     params.set(index === 0 ? "minRent" : "maxRent", String(newRange[index]));
-    router.push(`?${params.toString()}`, { scroll: false });
+    window.history.replaceState(null, "", `?${params.toString()}`);
     setRange(newRange);
     debouncedGetCount(newRange);
   };
@@ -124,7 +123,7 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
     const params = new URLSearchParams(searchParams.toString());
     params.set("minRent", String(newRange[0]));
     params.set("maxRent", String(newRange[1]));
-    router.push(`?${params.toString()}`, { scroll: false });
+    window.history.replaceState(null, "", `?${params.toString()}`);
 
     debouncedGetCount(newRange);
     setRange(newRange);

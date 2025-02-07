@@ -8,7 +8,7 @@ import { useDebouncedCallback } from "use-debounce";
 import LocationList, { LocationItem } from "./LocationList";
 import PopularLocations from "./PopularLocations";
 import { Location, useActiveLocation } from "@/hooks/useActiveLocation";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 const sessionToken = uuidv4();
 
@@ -26,7 +26,6 @@ export const LocationSearch = ({
   const [searchValue, setSearchValue] = useState(
     searchParams.get("search") || "",
   );
-  const router = useRouter();
   const [activeIndex, setActiveIndex] = useState(activeLocationIndex);
 
   const debouncedFetch = useDebouncedCallback(async (value: string) => {
@@ -60,7 +59,7 @@ export const LocationSearch = ({
     setSearchValue(value);
     const params = new URLSearchParams(searchParams.toString());
     params.set("search", value);
-    router.push(`?${params.toString()}`, { scroll: false });
+    window.history.replaceState(null, "", `?${params.toString()}`);
     debouncedFetch(value);
   };
 

@@ -5,12 +5,11 @@ import { useCount } from "@/context/CountContext";
 import { getTenementCount } from "@/helpers/getTenementCount";
 import { RentType, useTenementFilters } from "@/hooks/useTenementFilters";
 import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { ToggleGroup } from "radix-ui";
 import { useState } from "react";
 
 export const TypeToggle = () => {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const [value, setValue] = useState(
     searchParams.get("rentType") || DEFAULT_RENT_TYPE,
@@ -30,7 +29,7 @@ export const TypeToggle = () => {
       setValue(newValue);
       const params = new URLSearchParams(searchParams.toString());
       params.set("rentType", newValue);
-      router.push(`?${params.toString()}`, { scroll: false });
+      window.history.replaceState(null, "", `?${params.toString()}`);
     }
 
     if (["rent", "buy"].includes(newValue)) {

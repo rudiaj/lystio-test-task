@@ -20,6 +20,10 @@ export const getTenementCount = async (
         headers: {
           "Content-Type": "application/json",
         },
+        cache: "force-cache",
+        next: {
+          revalidate: 300,
+        },
         body: JSON.stringify(filters),
       },
     );
