@@ -15,7 +15,7 @@ export const PriceRangeSelect = () => {
   ]);
 
   const hasMinAndMax =
-    searchParams.has("minRent") && searchParams.has("maxRent");
+    searchParams.has("minRent") || searchParams.has("maxRent");
 
   return (
     <Popover.Root>

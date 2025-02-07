@@ -30,7 +30,6 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
   const [histogramData, setHistogramData] = useState<HistogramResponse | null>(
     null,
   );
-  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const normalizedHeights = useMemo(() => {
@@ -50,7 +49,6 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
 
   useEffect(() => {
     const fetchHistogram = async () => {
-      setIsLoading(true);
       setError(null);
       try {
         const response = await fetch(
@@ -68,7 +66,6 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
 
         const data = await response.json();
 
-        // Validate the response structure
         if (
           !data?.histogram ||
           !Array.isArray(data.histogram) ||
@@ -85,13 +82,10 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
             ? error.message
             : "Failed to fetch histogram data",
         );
-        // Set default histogram data
         setHistogramData({
           range: [0, 5000],
           histogram: Array(20).fill(0),
         });
-      } finally {
-        setIsLoading(false);
       }
     };
 
@@ -114,7 +108,6 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
     const newRange = [...range];
     newRange[index] = numValue;
 
-    // Ensure the range stays valid
     if (index === 0 && numValue > range[1]) {
       newRange[0] = range[1];
     } else if (index === 1 && numValue < range[0]) {
@@ -136,14 +129,6 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
     debouncedGetCount(newRange);
     setRange(newRange);
   };
-
-  if (isLoading) {
-    return (
-      <div className="mx-auto w-full animate-pulse">
-        <div className="bg-gray-200 h-[163px] w-full" />
-      </div>
-    );
-  }
 
   const currentHistogramData = histogramData || {
     range: [0, 5000],
